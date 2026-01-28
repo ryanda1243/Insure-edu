@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>IOHERB-SMART</title>
+        
+<style>
+    #loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 1s ease; /* Transisi menghilang yang sangat halus */
+    }
+
+    .loader-logo {
+        width: 150px; /* Ukuran dibuat sedikit lebih besar untuk fokus utama */
+        height: auto;
+        /* Animasi bernafas: durasi 2.5 detik, mengulang selamanya */
+        animation: breathe 2.5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+        0%, 100% { 
+            transform: scale(0.95); 
+            opacity: 0.7;
+            filter: grayscale(20%);
+        }
+        50% { 
+            transform: scale(1.1); 
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+    }
+
+    .loader-text {
+        margin-top: 20px;
+        color: #0e188a;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    #live-feedback {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    border-radius: 50px; /* Membuat bentuk pil yang elegan */
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    min-width: 300px;
+    border: 2px solid #f0f0f0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Animasi sedikit saat jawaban muncul */
+#live-feedback:not(:empty) {
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Warna khusus saat benar/salah agar teks feedback lebih hidup */
+.feedback-success {
+    color: #28a745 !important;
+    border-color: #28a745 !important;
+    background-color: #f8fff9 !important;
+}
+
+.feedback-error {
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    background-color: #fff8f8 !important;
+}
+
+.custom-btn {
+        background-color: #0e22d3 !important;
+        color: #ffffff !important;
+        border: none;
+    }
+
+    .text-center.text-white.mt-2.fw-bold {
+        color: #0e188a !important; /* Biar tulisan Video 1 & 2 kelihatan */
+    }
+
+    #live-feedback {
+        background: #f8f9fa;
+        border: 2px dashed #07c6cd;
+        color: #0e188a;
+        padding: 15px;
+        border-radius: 15px;
+        display: inline-block;
+        min-width: 300px;
+        margin-top: 15px;
+    }
+  /* GANTI WARNA UTAMA (Contoh: jadi Biru Tua #0e188a) */
+
+/* 1. Paksa ganti semua elemen yang pakai background hijau */
+.section-overlay, 
+.custom-btn, 
+.social-icon-link:hover, 
+.nav-item .nav-link.active,
+.bg-secondary {
+    background-color: #0e188a !important; 
+}
+
+/* 2. Ganti warna garis samping di kotak "RESIKO & ASURANSI" */
+.shadow-lg[style*="border-left"] {
+    border-left-color: #0e188a !important;
+}
+
+/* 3. Ganti warna border putus-putus di kuis */
+.quiz-item, .custom-form {
+    border-top: 5px solid #0e188a !important;
+}
+
+/* 4. Ganti warna garis di bawah judul simulasi */
+h2.text-primary {
+    border-left-color: #0e188a !important;
+    color: #0e188a !important;
+}  
+</style>
+
+        <!-- CSS FILES -->                
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/templatemo-tiya-golf-club.css" rel="stylesheet">
+
+<!--
+
+TemplateMo 587 Tiya Golf Club
+
+https://templatemo.com/tm-587-tiya-golf-club
+
+-->
+<body>
+  <div id="loader-wrapper">
+    <img src="images/insure.png" alt="IOHERB Logo" class="loader-logo">
+    
+    <div class="loader-text">INSURE-EDU</div>
+</div>
+
+       
+</nav>
+       <nav class="navbar navbar-expand-lg">                
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="images/ss_insu.png" class="navbar-brand-image img-fluid" alt="Limbah Kosmetik">
+            <span style="-webkit-text-fill-color: rgb(255, 255, 255);"class="navbar-brand-text ms-2">
+                INSURE-EDU <br>
+                <small>Digital Insurance Literacy</small>
+            </span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+ <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_1">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_2">Kuis Interaktif</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_3">Simulasi Premi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="#section_4">Pendekatan Digital</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+        
+    </div>
+</nav>
+
+       
+    </div>
+</header>
+<!-- warna paling atas-->
+            </div>
+            
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+    <div class="section-overlay"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-10 col-12 mb-5 mb-lg-0" style="padding-top: 100px;">
+                
+                <h2 class="text-white" style="font-size: 1.5rem;">INSURE-EDU</h2>
+                <h1 class="text-white mb-3" style="font-size: 2.2rem;">Digital Insurance Literacy</h1>
+                <h1 class="text-white mb-3" style="font-size: 2.2rem;">Membangun Generasi Tangguh Indonesia Emas 2045</h1>
+                </div>
+
+                
+
+                <a href="#section_1" class="btn custom-btn smoothscroll mt-2" style="padding: 10px 25px; font-size: 0.9rem;">Pelajari Selengkapnya</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+           <section class="section-padding" id="section_1" style="background: #fff5f5; padding: 100px 0; min-height: 100vh;">
+    <div class="container">
+        
+        <div class="row text-center mb-4">
+            <div class="col-12">
+                <h2 class="mb-0">Resiko & Asuransi</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12">
+                <div class="bg-white p-4 p-lg-5 shadow-lg" style="border-radius: 20px; border-left: 10px solid #07c6cd;">
+                    <h4 class="text-primary mb-3">RESIKO & ASURANSI</h4>
+                    <p class="text-dark fs-6" style="text-align: justify; line-height: 1.6;">
+                    Risiko adalah kemungkinan terjadinya peristiwa yang dapat menimbulkan kerugian. Dalam kehidupan pelajar, risiko bisa berupa sakit, kecelakaan, kehilangan barang, atau bencana alam. Risiko tidak dapat dihindari, tetapi dapat dikelola dengan baik.                    
+                    </p>
+                    <p class="text-dark fs-6" style="text-align: justify; line-height: 1.6;">
+                    Asuransi merupakan salah satu cara pengelolaan risiko dengan memberikan perlindungan keuangan melalui pembayaran premi. Dengan memahami asuransi sejak dini, pelajar dapat menjadi generasi yang sadar risiko dan cerdas finansial, sesuai dengan tujuan literasi keuangan OJK.                     
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-6 col-12 mb-4">
+                <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden border border-white border-2">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Trh9YoiSuII?si=9SSnDltRqWZOCf3i" 
+                        title="Video Edukasi 1" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="text-center text-dark mt-2 fw-bold">Video 1</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-12 mb-4">
+                <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden border border-white border-2">
+                    <iframe 
+                        src="https://www.youtube.com/embed/rCC4DrHQwzQ?si=srxA2PdH1ucPvzk6" 
+                        title="Video Edukasi 2" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+               <p class="text-center text-dark mt-2 fw-bold">Video 2</p>
+            </div>
+        </div>
+
+        <div class="row text-center mt-4 text-center text-dark mt-2 fw-bold">
+            <div class="mb-0 col-12">
+                <a href="#section_2" class="btn custom-btn ">Lanjut ke Kuis Interaktif</a>
+            </div>
+        </div>
+        <div class="row text-center mt-4 text-dark">
+            <div class="mb-0 col-12">
+                <a href="#section_3" class="btn custom-btn ">Lanjut ke Simulasi Premi</a>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+
+<section class="contact-section section-padding" id="section_2" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-12 text-center mb-5">
+                <h2 class="text-primary d-inline-block px-4 py-2">KUIS INTERAKTIF</h2>
+            </div>
+
+            <div class="col-lg-10 col-12">
+                <div class="custom-form contact-form bg-white shadow-lg p-lg-5 p-4" style="border-radius: 30px;">
+                    
+                    <div class="quiz-question-wrapper mb-5">
+                        <p class="fw-bold fs-5 text-dark">1. Yang dimaksud dengan risiko adalah …</p>
+                        <div class="row g-2">
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">A. Keuntungan yang pasti</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">B. Peristiwa yang selalu menguntungkan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'benar')">C. Kemungkinan terjadinya kerugian</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">D. Tabungan masa depan</button></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question-wrapper mb-5">
+                        <p class="fw-bold fs-5 text-dark">2. Contoh risiko yang sering dialami pelajar adalah …</p>
+                        <div class="row g-2">
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">A. Mendapat hadiah</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'benar')">B. Kecelakaan atau sakit</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">C. Naik kelas</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">D. Menang lomba</button></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question-wrapper mb-5">
+                        <p class="fw-bold fs-5 text-dark">3. Fungsi utama asuransi adalah …</p>
+                        <div class="row g-2">
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">A. Menambah beban keuangan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">B. Menghilangkan semua risiko</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'benar')">C. Memberikan perlindungan keuangan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-secondary w-100 text-start p-3" onclick="checkQuiz(this, 'salah')">D. Menggantikan tabungan</button></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <h5 id="live-feedback" class="fw-bold p-3 rounded shadow-sm d-inline-block bg-light" style="min-width: 250px;">Pilih jawabanmu...</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section section-padding" id="section_3" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+                <h2 class="text-primary mb-5" style="border-left: 8px solid #07c6cd; padding-left: 15px;">3. SIMULASI PREMI</h2>
+
+                <div class="quiz-item bg-white shadow-sm p-4 mb-5" style="border-radius: 20px;">
+                    <h5 class="text-primary mb-4">Studi Kasus 1 (Level Mudah – SMP)</h5>
+                    <div class="mb-3 text-dark">
+                        <h6 class="fw-bold">📖 Cerita Kasus [cite: 21]</h6>
+                        <p style="text-align: justify;">Ayu adalah siswi SMP kelas 8. Setiap hari, Ayu mendapat uang saku sebesar Rp10.000. Orang tua Ayu mengenalkan asuransi kesehatan pelajar dengan premi Rp500 per hari agar Ayu tetap terlindungi jika sakit atau mengalami kecelakaan ringan.</p>
+                    </div>
+                    <div class="mb-4 py-3" style="border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd;">
+                        <h6 class="fw-bold text-dark">🧮 Simulasi Premi </h6>
+                        <p class="text-primary fw-bold mb-0">Rp500 × 30 hari = Rp15.000 per bulan </p>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-dark">📝 Soal Interaktif </h6>
+                        <p class="fw-bold">1. Premi asuransi Ayu dalam satu bulan adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Rp10.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'benar')">B. Rp15.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">C. Rp30.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Rp50.000</button></div>
+                        </div>
+                        <p class="fw-bold">2. Premi Rp500 per hari diambil dari … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Seluruh uang saku</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">B. Tabungan orang tua</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'benar')">C. Sebagian kecil uang saku</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Pinjaman</button></div>
+                        </div>
+                        <p class="fw-bold">3. Tujuan Ayu memiliki asuransi adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Menambah uang jajan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'benar')">B. Perlindungan jika sakit atau kecelakaan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">C. Membeli barang baru</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-primary w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Mengurangi uang saku</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-item bg-white shadow-sm p-4 mb-5" style="border-radius: 20px;">
+                    <h5 class="text-success mb-4">Studi Kasus 2 (Level Menengah – SMP) </h5>
+                    <div class="mb-3 text-dark">
+                        <h6 class="fw-bold">📖 Cerita Kasus</h6>
+                        <p style="text-align: justify;">Budi adalah siswa SMP kelas 9 dengan uang saku Rp15.000 per hari. Ia menyisihkan Rp1.000 per hari untuk premi asuransi pelajar.</p>
+                    </div>
+                    <div class="mb-4 py-3" style="border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd;">
+                        <h6 class="fw-bold text-dark">🧮 Simulasi Premi</h6>
+                        <p class="text-success fw-bold mb-0">Rp1.000 × 30 hari = Rp30.000 per bulan </p>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-dark">📝 Soal Interaktif </h6>
+                        <p class="fw-bold">4. Persentase uang saku Budi yang digunakan untuk premi adalah …</p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'benar')">A. Sebagian kecil</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">B. Seluruhnya</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">C. Lebih dari setengah</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Tidak ada</button></div>
+                        </div>
+                        <p class="fw-bold">5. Manfaat utama asuransi bagi Budi adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Menambah nilai rapor</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'benar')">B. Mengurangi risiko biaya pengobatan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">C. Mengganti uang jajan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-success w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Menambah uang tabungan</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-item bg-white shadow-sm p-4 mb-5" style="border-radius: 20px;">
+                    <h5 class="text-info mb-4">Studi Kasus 3 (Level Menengah – SMA)</h5>
+                    <div class="mb-3 text-dark">
+                        <h6 class="fw-bold">📖 Cerita Kasus</h6>
+                        <p style="text-align: justify;">Raka adalah siswa SMA kelas 11 yang mendapat uang saku Rp20.000 per hari. Ia mengikuti asuransi kecelakaan pelajar dengan premi Rp1.500 per hari.</p>
+                    </div>
+                    <div class="mb-4 py-3" style="border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd;">
+                        <h6 class="fw-bold text-dark">🧮 Simulasi Premi</h6>
+                        <p class="text-info fw-bold mb-0">Rp1.500 × 30 hari = Rp45.000 per bulan</p>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-dark">📝 Soal Interaktif </h6>
+                        <p class="fw-bold">6. Premi bulanan yang dibayarkan Raka adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Rp30.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">B. Rp40.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'benar')">C. Rp45.000</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Rp60.000</button></div>
+                        </div>
+                        <p class="fw-bold">7. Jika Raka mengalami kecelakaan, manfaat asuransi yang diterima adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Uang jajan tambahan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'benar')">B. Bantuan biaya perawatan</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">C. Hadiah sekolah</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-info w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Penggantian nilai</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-item bg-white shadow-sm p-4 mb-5" style="border-radius: 20px;">
+                    <h5 class="text-warning mb-4">Studi Kasus 4 (Level Lanjutan – SMA)</h5>
+                    <div class="mb-3 text-dark">
+                        <h6 class="fw-bold">📖 Cerita Kasus [cite: 59]</h6>
+                        <p style="text-align: justify;">Dina adalah siswi SMA kelas 12. Ia menyisihkan Rp2.000 per hari dari uang sakunya sebesar Rp25.000 untuk asuransi kesehatan pelajar.</p>
+                    </div>
+                    <div class="mb-4 py-3" style="border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd;">
+                        <h6 class="fw-bold text-dark">🧮 Simulasi Premi [cite: 61]</h6>
+                        <p class="text-warning fw-bold mb-0">Rp2.000 × 30 hari = Rp60.000 per bulan</p>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-dark">📝 Soal Interaktif </h6>
+                        <p class="fw-bold">8. Keputusan Dina menyisihkan uang saku untuk premi menunjukkan sikap … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Boros</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">B. Tidak peduli</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'benar')">C. Bertanggung jawab secara finansial</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Ceroboh</button></div>
+                        </div>
+                        <p class="fw-bold">9. Pelajaran yang dapat diambil dari kasus Dina adalah … </p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">A. Asuransi hanya untuk orang dewasa</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">B. Premi selalu mahal</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'benar')">C. Asuransi bisa disesuaikan dengan kemampuan pelajar</button></div>
+                            <div class="col-md-6"><button class="btn btn-outline-warning w-100 text-start" onclick="checkAnswer(this, 'salah')">D. Uang saku tidak perlu diatur</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <h5 id="live-feedback" class="fw-bold p-3 rounded bg-white shadow-sm d-inline-block" style="min-width: 300px; color: #333;">Pilih jawabanmu...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<audio id="audio-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="audio-wrong" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>  
+
+
+<section class="section-padding" id="section_4" style="background: #f0f8ff;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-12 text-center mb-5">
+                <h2 class="text-primary">PENDEKATAN DIGITAL </h2>
+                <p class="text-muted">Penjelasan penjelasan penjelasan</p>
+            </div>
+
+            <div class="col-lg-10 col-12">
+                <div class="row">
+                    
+                    <div class="col-md-6 col-12 mb-4">
+                        <div class="video-card bg-white p-3 shadow-sm" style="border-radius: 20px;">
+                            <div class="ratio ratio-16x9 mb-3" style="border-radius: 15px; overflow: hidden; background: #000;">
+                                <iframe src="https://www.youtube.com/embed/X-W-OVOUux0?si=9hrHHepwZ6RLbLB-" title="Penjelasan" allowfullscreen></iframe>
+                            </div>
+                            <h6 class="fw-bold text-dark">1. Penjelasan</h6>
+                            <p class="small text-muted mb-0">Penjelasan penjelasan penjelasan penjelasan.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-4">
+                        <div class="video-card bg-white p-3 shadow-sm" style="border-radius: 20px;">
+                            <div class="ratio ratio-16x9 mb-3" style="border-radius: 15px; overflow: hidden; background: #000;">
+                                <iframe src="https://www.youtube.com/embed/X-W-OVOUux0?si=9hrHHepwZ6RLbLB- " title="Penjelasan" allowfullscreen></iframe>
+                            </div>
+                            <h6 class="fw-bold text-dark">2. Penjelasan</h6>
+                            <p class="small text-muted mb-0">Penjelasan penjelasan penjelasan penjelasan.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-4">
+                        <div class="video-card bg-white p-3 shadow-sm" style="border-radius: 20px;">
+                            <div class="ratio ratio-16x9 mb-3" style="border-radius: 15px; overflow: hidden; background: #000;">
+                                <iframe src="https://www.youtube.com/embed/cn2JNs6V9QM?si=dDV0t7j4946t7nzV" title="Penjelasan" allowfullscreen></iframe>
+                            </div>
+                            <h6 class="fw-bold text-dark">3. Penjelasan</h6>
+                            <p class="small text-muted mb-0">Penjelasan penjelasan penjelasan penjelasan.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-4">
+                        <div class="video-card bg-white p-3 shadow-sm" style="border-radius: 20px;">
+                            <div class="ratio ratio-16x9 mb-3" style="border-radius: 15px; overflow: hidden; background: #000;">
+                                <iframe src="https://www.youtube.com/embed/bBD_GY1XCmE?si=E5Rndur6jc_g7KIT" title="Penjelasan" allowfullscreen></iframe>
+                            </div>
+                            <h6 class="fw-bold text-dark">4. Penjelasan</h6>
+                            <p class="small text-muted mb-0">Penjelasan penjelasan penjelasan penjelasan.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+      <footer class="site-footer" style="background-color: #001B48; color: #ffffff; padding: 25px 0;">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <div class="col-lg-3 col-md-4 col-12 mb-3 mb-lg-0">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="images/ss_insu.png" class="img-fluid" alt="Logo" style="max-height: 45px; width: auto;">
+                    <div class="ms-2">
+                        <strong style="font-size: 1.1rem; display: block; line-height: 1; color: #fff;">INSURE</strong>
+                        <strong style="color: #f7f7f7; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;">EDU</strong>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6 col-md-4 col-12 mb-3 mb-lg-0 text-center">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item mx-2"><a href="#section_1" class="text-white-50 text-decoration-none small">Beranda</a></li>
+                    <li class="list-inline-item mx-2"><a href="#section_2" class="text-white-50 text-decoration-none small">Kuis Interaktif</a></li>
+                    <li class="list-inline-item mx-2"><a href="#section_3" class="text-white-50 text-decoration-none small">Simulasi Premi</a></li>
+                    <li class="list-inline-item mx-2"><a href="#section_4" class="text-white-50 text-decoration-none small">Video Pendekatan Digital </a></li>
+                   
+                </ul>
+                <p style="font-size: 11px; margin-bottom: 0; color: rgba(255,255,255,0.5);">
+                    Copyright © 2026 <strong>INSURE-EDU</strong>.
+                </p>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-12 text-lg-end text-center">
+                <ul class="social-icon list-inline mb-0">
+                    <li class="social-icon-item list-inline-item">
+                        <a href="#" class="social-icon-link bi-instagram"></a>
+                    </li>
+                    <li class="social-icon-item list-inline-item">
+                        <a href="#" class="social-icon-link bi-whatsapp"></a>
+                    </li>
+                    <li class="social-icon-item list-inline-item">
+                        <a href="#" class="social-icon-link bi-twitter"></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    
+</footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/animated-headline.js"></script>
+        <script src="js/modernizr.js"></script>
+        <script src="js/custom.js"></script>
+
+<script>
+    window.addEventListener("load", function() {
+        const loader = document.getElementById("loader-wrapper");
+        
+        setTimeout(function() {
+            // Menghilangkan dengan efek fade out yang lambat (elegan)
+            loader.style.opacity = "0";
+            
+            setTimeout(function() {
+                loader.style.display = "none";
+            }, 1000); // Waktu yang dibutuhkan sampai benar-benar hilang dari layar
+        }, 3000); // Ditahan selama 3 detik
+    });
+
+function checkQuiz(element, status) {
+    const soundCorrect = document.getElementById('audio-correct');
+    const soundWrong = document.getElementById('audio-wrong');
+    const feedback = document.getElementById('live-feedback');
+
+    // Cari pembungkus per SATU soal
+    const wrapper = element.closest('.quiz-question-wrapper');
+    const allButtons = wrapper.querySelectorAll('button');
+
+    // Kunci tombol soal ini saja & Anti-Hilang
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.setProperty('opacity', '1', 'important');
+    });
+
+    if (status === 'benar') {
+        element.style.setProperty('background-color', '#28a745', 'important');
+        element.style.setProperty('color', '#ffffff', 'important');
+        feedback.innerText = "MANTAP! JAWABAN BENAR! 🌟";
+        soundCorrect.play();
+    } else {
+        element.style.setProperty('background-color', '#dc3545', 'important');
+        element.style.setProperty('color', '#ffffff', 'important');
+        
+        // Tunjukkan jawaban benar
+        allButtons.forEach(btn => {
+            if (btn.getAttribute('onclick').includes("'benar'")) {
+                btn.style.setProperty('background-color', '#28a745', 'important');
+                btn.style.setProperty('color', '#ffffff', 'important');
+            }
+        });
+        feedback.innerText = " ❌ Jawaban benar adalah Hijau.";
+        soundWrong.play();
+    }
+}
+
+function checkAnswer(element, status) {
+    const soundCorrect = document.getElementById('audio-correct');
+    const soundWrong = document.getElementById('audio-wrong');
+    // Kita ambil feedback dari section simulasi (ID live-feedback kedua)
+    const feedback = element.closest('.container').querySelector('#live-feedback');
+
+    const questionBox = element.closest('.row'); // Mencari baris tombol soal terkait
+    const buttonsInQuestion = questionBox.querySelectorAll('button');
+
+    buttonsInQuestion.forEach(btn => {
+        btn.disabled = true;
+        btn.style.setProperty('opacity', '1', 'important');
+    });
+
+    if (status === 'benar') {
+        element.style.setProperty('background-color', '#28a745', 'important');
+        element.style.setProperty('color', '#ffffff', 'important');
+        feedback.innerText = "MANTAP! JAWABAN BENAR! 🌟";
+        feedback.className = "fw-bold p-3 rounded shadow-sm d-inline-block feedback-success";
+        if(soundCorrect) soundCorrect.play();
+    } else {
+        element.style.setProperty('background-color', '#dc3545', 'important');
+        element.style.setProperty('color', '#ffffff', 'important');
+        
+        buttonsInQuestion.forEach(btn => {
+            if (btn.getAttribute('onclick').includes("'benar'")) {
+                btn.style.setProperty('background-color', '#28a745', 'important');
+                btn.style.setProperty('color', '#ffffff', 'important');
+            }
+        });
+        feedback.innerText = "MAAF ANDA SALAH! ❌ Cek kembali simulasinya.";
+        feedback.className = "fw-bold p-3 rounded shadow-sm d-inline-block feedback-error";
+        if(soundWrong) soundWrong.play();
+    }
+}
+</script>
+    </body>
+    
+</html>
